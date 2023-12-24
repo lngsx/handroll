@@ -1,5 +1,5 @@
 - hosts: localhost
-  remote_user: "{{ local_user }}"
+  remote_user: "{{ human }}"
   vars:
       github_repo: https://cli.github.com/packages/rpm/gh-cli.repo
   vars_prompt:
