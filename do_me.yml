@@ -1,0 +1,39 @@
+- hosts: localhost
+  remote_user: "{{ local_user }}"
+  vars:
+      github_repo: https://cli.github.com/packages/rpm/gh-cli.repo
+  vars_prompt:
+    - name: some_noise
+      prompt: "To praise to the Machine Lord, say 'please'."
+      private: false
+
+  tasks:
+    - name: Machine feels praised.
+      debug:
+        msg: "Gooood. Human Gooooood."
+
+    # The config-manager needs this package to work.
+    - name: Install Fedora Workstation Repositories.
+      ansible.builtin.package:
+        name: fedora-workstation-repositories
+        state: latest
+      become: true
+
+    - name: Enable Google Chrome Repository
+      ansible.builtin.shell: 
+        cmd: dnf config-manager --set-enabled google-chrome
+      become: true
+
+    - name: Enable Github Repository
+      ansible.builtin.shell: 
+        cmd: 'dnf config-manager --add-repo {{ github_repo }}'
+      become: true
+
+    - name: Install shit
+      ansible.builtin.package:
+        name:
+          - google-chrome-stable
+          - gh
+        state: latest
+      become: true
+
