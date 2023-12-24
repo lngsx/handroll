@@ -12,6 +12,12 @@
       debug:
         msg: "Gooood. Human Gooooood."
 
+    - name: Upgrade all packages
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+      become: true
+
     # The config-manager needs this package to work.
     - name: Install Fedora Workstation Repositories.
       ansible.builtin.package:
