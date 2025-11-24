@@ -27,12 +27,12 @@
 
     - name: Enable Google Chrome Repository
       ansible.builtin.shell: 
-        cmd: dnf config-manager --set-enabled google-chrome
+        cmd: dnf config-manager setopt google-chrome.enabled=1
       become: true
 
     - name: Enable Github Repository
       ansible.builtin.shell: 
-        cmd: 'dnf config-manager --add-repo {{ github_repo }}'
+        cmd: 'dnf config-manager addrepo --from-repofile={{ github_repo }}'
       become: true
 
     - name: Install shit
